@@ -1,0 +1,80 @@
+<!--<button [disabled]="!disabledButtonSameForm" (click)="showUserForm = !showUserForm" class="btn btn-dark mb-3">Add User</button>-->
+<div class="card card-body mb-3">
+  <h2>Add User</h2>
+
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <div class="form-group">
+      <label>First Name</label>
+      <input 
+       [(ngModel)]="user.firstName"
+       type="text" 
+       [ngClass]="{'is-invalid':userFirstName.errors && userFirstName.touched}"
+       class="form-control" 
+       name="firstName"
+       #userFirstName="ngModel"
+       required
+       minlength="2"       
+       >
+       <div [hidden]="!userFirstName.errors?.required" class="invalid-feedback">
+          First name required
+        </div>
+        <div [hidden]="!userFirstName.errors?.minlength" class="invalid-feedback">
+            Must be at least 2 characters
+          </div>       
+    </div>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        <input
+        [(ngModel)]="user.lastName"
+         type="text" 
+         [ngClass]="{'is-invalid':userLastName.errors && userLastName.touched}"
+         class="form-control" 
+         name="lastName"
+         #userLastName="ngModel"
+         required
+         minlength="2"       
+         >
+         <div [hidden]="!userLastName.errors?.required" class="invalid-feedback">
+            Last name required
+          </div>
+          <div [hidden]="!userLastName.errors?.minlength" class="invalid-feedback">
+              Must be at least 2 characters
+            </div>
+      </div>
+
+      <div class="form-group">
+          <label>Email</label>
+          <input
+          [(ngModel)]="user.email"
+         type="email" 
+         [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
+         class="form-control" 
+         name="email"
+         #userEmail="ngModel"
+         required
+         pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"       
+         >
+         <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
+            Email required
+          </div>
+          <div [hidden]="!userEmail.errors?.pattern" class="invalid-feedback">
+              Email is not valid
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" (click)="filePicker.click()" >Pick Image</button>
+            <input type="file" #filePicker>
+        </div>
+  
+
+    <button  
+    [hidden]="!isNew" [disabled]="!userForm.form.valid"
+      class="btn btn-block mb-3" [ngClass]="currentClasses">Add New User</button>
+      <button  
+      [hidden]="isNew" [disabled]="!userForm.form.valid"
+       class="btn btn-block mb-3" [ngClass]="currentClasses">Edit User</button>
+  </form>
+</div>
+

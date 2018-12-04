@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a routerLink="/" class="navbar-brand">Besso</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a routerLink="/users" routerLinkActive="routerLinkActiveStyle" class="nav-link">רשימת משתמשים</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/posts" class="nav-link">רשימת פוסטים </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a routerLink="/search" class="nav-link">חיפוש בגד</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/my-closet" class="nav-link">הארון שלי</a>
+          </li>
+        </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a routerLink="/register" class="nav-link">הרשמה</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/login" class="nav-link">כניסת משתמש</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

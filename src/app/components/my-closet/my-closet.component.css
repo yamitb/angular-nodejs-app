@@ -1,0 +1,38 @@
+/*.container {
+ background-color: blue;
+}*/
+
+.display-settings-container{
+  width: 50%;
+}
+
+@media (min-width: 1200px){
+  .container {
+    height: 1000px;
+  }
+}
+
+@media (min-width: 992px){
+  .container {
+    height: 900px;
+  }
+}
+
+@media (min-width: 768px){
+  .container {
+    height: 700px;
+  }
+}
+
+
+@media (min-width: 576px){
+  .container {
+    height: 500px;
+  }
+}
+
+@media (max-width: 576px){
+  .container {
+    height: 500px;
+  }
+}

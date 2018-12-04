@@ -1,0 +1,177 @@
+<h2>Users Component</h2>
+
+
+<!--Add User form when user-form in seperate component from users componenet -->
+
+
+<app-user-form></app-user-form>
+
+
+<!--Add User form when form in the same component with users componenet -->
+<!--<button (click)="showUserForm = !showUserForm" [disabled]="disabledButtonSameForm" class="btn btn-dark mb-3">Add User - add user the same component</button>
+<div class="card card-body mb-3" *ngIf="showUserForm">
+  <h2>Add User</h2>
+  <!-- binding: [] - binding from the component to the template
+        () - binding from the template to the component/class 
+      ngModel= 2 ways dataBinding-->
+  <!--<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <div class="form-group">
+      <label>First Name</label>
+      <input 
+       (focus)="fireEvent($event)" 
+       [(ngModel)]="user.firstName"
+       type="text" 
+       [ngClass]="{'is-invalid':userFirstName.errors && userFirstName.touched}"
+       class="form-control" 
+       name="firstName"
+       #userFirstName="ngModel"
+       required
+       minlength="2"       
+       >
+       <div [hidden]="!userFirstName.errors?.required" class="invalid-feedback">
+          First name required
+        </div>
+        <div [hidden]="!userFirstName.errors?.minlength" class="invalid-feedback">
+            Must be at least 2 characters
+          </div>       
+    </div>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        <input
+        [(ngModel)]="user.lastName"
+         type="text" 
+         [ngClass]="{'is-invalid':userLastName.errors && userLastName.touched}"
+         class="form-control" 
+         name="lastName"
+         #userLastName="ngModel"
+         required
+         minlength="2"       
+         >
+         <div [hidden]="!userLastName.errors?.required" class="invalid-feedback">
+            Last name required
+          </div>
+          <div [hidden]="!userLastName.errors?.minlength" class="invalid-feedback">
+              Must be at least 2 characters
+            </div>
+      </div>
+  
+  
+  
+      
+      <div class="form-group">
+          <label>Email</label>
+          <input
+          [(ngModel)]="user.email"
+         type="email" 
+         [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
+         class="form-control" 
+         name="email"
+         #userEmail="ngModel"
+         required
+         pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"       
+         >
+         <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
+            Email required
+          </div>
+          <div [hidden]="!userEmail.errors?.pattern" class="invalid-feedback">
+              Email is not valid
+            </div>
+        </div>
+  
+  
+  
+   <!-- 
+      <div class="form-group">
+        <label>Age</label>
+        <input 
+        [(ngModel)]="user.age"
+        type="number" 
+        class="form-control" 
+        #userAge="ngModel"
+        name="age">
+      </div>
+      <div class="form-group">
+        <label>Street Address</label>
+        <input 
+        [(ngModel)]="user.address.street"
+        type="text" 
+        class="form-control" 
+        #userStreet="ngModel"
+        name="street">
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input 
+        [(ngModel)]="user.address.city"
+        type="text" 
+        class="form-control"
+        #userCity="ngModel"
+        name="city">
+      </div>
+    -->
+
+ 
+
+
+
+    <!--<button (mouseout)="mouseout1($event)"  
+    [disabled]="!userForm.form.valid"
+      class="btn btn-block mb-3" [ngClass]="currentClasses">Add New User</button>
+  </form>
+</div>-->
+
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<ul *ngIf="!isLoading" class="list-unstyled">
+  <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive" [style.border-color]="user.isActive? 'green': '' ">
+    <div class="row">
+      <div class="col-sm-4">
+        <img *ngIf="user.image" [ngStyle]="{'width': '200px', 'height': '200px'}" class="img-fluid" [src]="user.image" alt="">
+      </div>
+      <div class="col-sm-8">
+        <h3 [ngStyle]="currentStyles"> <a routerLink="/user/{{user.id}}" >{{user.firstName | uppercase}} {{user.lastName | lowercase}}</a>
+          <small>
+            <button class="btn btn-dark" (click)="user.hide = !user.hide;">
+              <i [ngClass]="user.hide ? 'fa fa-plus' : 'fa fa-minus'"></i>
+            </button>
+          </small>
+          <small>
+              <i (click)="editUser(user)" *ngIf="!user.hide" class="ml-3 fa fa-pencil" >
+              </i>
+        </small>
+        <small>
+            <i (click)="removeUser(user.id)" *ngIf="!user.hide" class="ml-3 fa fa-remove" >
+            </i>
+      </small>
+        </h3>
+        <ul class="list-group" *ngIf="!user.hide">
+          <li class="list-group-item">
+                Email: {{ user.email }}
+          </li>
+          <li class="list-group-item">
+              Joined: {{user.registered | date: 'short'}}
+          </li>
+          
+         <!-- <li class="list-group-item">
+            Age: {{ user.age }}
+          </li>
+          <li class="list-group-item">
+            Address: {{user.address.street}}, {{user.address.city}}
+          </li>
+          <li class="list-group-item">
+            Balance: {{ user.balance | currency: "USD": "symbol"}}
+          </li>
+          <li class="list-group-item">
+            Number: {{ 5 | number:"1.4"}} until {{ 0.5 | percent }}
+          </li>
+          <li class="list-group-item" ngNonBindable>
+            {{ 5 | number:"1.4"}}
+          </li>
+        -->
+        </ul>
+      </div>
+    </div>
+
+  </li>
+</ul>
