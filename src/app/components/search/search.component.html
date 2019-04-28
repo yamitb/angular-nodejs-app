@@ -1,5 +1,50 @@
-<p>
-  search works!
-</p>
 
-<button (click)="batches()" ></button>
+      <app-search-form #searchForm></app-search-form>
+      <br>
+      <h1 *ngIf="!searchForm.isNewSearch && (items || items.length > 0)" class="search-title">Results</h1>
+      <hr>
+
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <div *ngIf="items">
+          <div class="card item-card-search" *ngFor="let item of items">
+             <div class="card-body">
+               <div class="row">
+                   <div class="col-4 col-md-6">
+                       <p class="item-search-title">{{ item.type }} </p>
+                       <hr>
+                       <p class="item-search-field">{{ item.size }}</p>
+                       <p class="item-search-field">{{ item.color }}</p>
+                       <p class="item-search-field">{{ item.gender }}</p>
+                       <p class="item-search-field">{{ item.city }}</p>
+                       <hr>
+                       <button *ngIf="userIsAuthanticated"  class="btn-chat"><i class="fa fa-comment"></i></button> 
+                   </div>
+                   <div class="item-image-search-container col-8 col-md-6">
+                       <img [src]="item.imagePath" [alt]="item.type">
+                     </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+          
+  <mat-paginator class="search-paginator" *ngIf="items && items.length > 0"
+  [length]="totalItems" 
+  [pageSize]="itemsPerPage" 
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)">
+  </mat-paginator>
+
+        <p class="info-text" *ngIf="!searchForm.isNewSearch && (!items || items.length <= 0)">No items matched your search!</p>
+  
+
+
+ 
+
+
+
+
+
+
+
+

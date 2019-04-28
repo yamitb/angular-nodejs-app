@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
+import { of, Observable,Subject } from 'rxjs';
 import { Post } from '../models/Post';
 
 const htttpOptions = {
@@ -12,9 +12,30 @@ const htttpOptions = {
 })
 export class PostsService {
   postUrl: string = 'https://jsonplaceholder.typicode.com/posts';
+  posts: Post[];
+  private postsUpdated = new Subject<Post[]>();
 
 
   constructor(private http: HttpClient) { }
+
+  //Posts Db functions
+
+  getPostsDb() {
+    this.http.get<{ message: string, posts: any }>('http://localhost:3000/posts')
+      .subscribe((responseData) => {
+        this.posts = responseData.posts;
+        this.postsUpdated.next([...this.posts]);
+      });
+  }
+  
+  getPostsUpdatedListener() {
+    return this.postsUpdated.asObservable();
+  }
+
+
+
+
+  //Posts API functions
 
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postUrl);

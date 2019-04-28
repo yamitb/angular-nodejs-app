@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { User } from '../../models/User';
 import { UsersService } from '../../services/users.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-users',
@@ -28,8 +30,10 @@ export class UsersComponent implements OnInit {
   currentStyles = {};
   @ViewChild('userForm') form: any;
   isLoading = false;
+  userIsAuthenticated = false;
+  private authListenerSub: Subscription;
 
-  constructor(private usersService: UsersService) { 
+  constructor(private usersService: UsersService,private authService: AuthService) { 
     
   }
 
@@ -40,9 +44,20 @@ export class UsersComponent implements OnInit {
       this.isLoading = false;
       this.users = users;
     });
+    
+    //this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authListenerSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated =>{
+      this.userIsAuthenticated = isAuthenticated;
+    });
   
     this.setCurrentClasses();
     this.setCurrentstyles();
+  }
+
+  ngOnDestroy() {
+    this.authListenerSub.unsubscribe();
   }
 
   setCurrentClasses(){

@@ -1,0 +1,13 @@
+<app-book-form></app-book-form>
+
+<h2 class="mb-5 mt-5">Books List</h2>
+  <div class="card" *ngFor="let book of books">
+    <div class="card-body">
+      <h4> <a routerLink="/book/{{book.id}}" >{{ book.title }} </a></h4>
+      <p>{{ book.body }}</p>
+      <hr>
+      <button *ngIf="userIsAuthanticated &&  book.userId === user.id" (click)="removeBook(book.id)" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+<!-- 
+      <button (click)="editPost(book)" class="btn btn-light"><i class="fa fa-pencil"></i></button> -->
+    </div>
+  </div>

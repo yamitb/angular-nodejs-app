@@ -1,0 +1,83 @@
+<div class="card card-body search-form-card">
+<h3 class="search-item-title">Search Item</h3>
+<hr>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <div class="row">
+      <div class="col-6 col-md-4">
+          <mat-form-field class="select-search-form">
+            <mat-select 
+            type="text"
+            placeholder="Type" 
+            formControlName="type"
+            >
+              <mat-option *ngFor="let type of types" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('type').invalid && form.get('type').touched">Type required</mat-error>
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field class="select-search-form">
+            <mat-select 
+            placeholder="Size" 
+            formControlName="size">
+              <mat-option *ngFor="let size of sizes" [value]="size">
+                {{size}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('size').invalid && form.get('size').touched">Size required</mat-error>
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field class="select-search-form">
+            <mat-select 
+            placeholder="Color"  
+            formControlName="color">
+              <mat-option *ngFor="let color of colors" [value]="color">
+                {{color}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('color').invalid && form.get('color').touched">Color required</mat-error>
+      </div>
+
+ 
+
+      <div class="col-6 col-md-4">
+          <mat-form-field class="select-search-form">
+            <mat-select 
+             placeholder="Gender" 
+             formControlName="gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender">
+                {{gender}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('gender').invalid && form.get('gender').touched">Gender required</mat-error>
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field class="select-search-form">
+            <mat-select 
+            placeholder="City" 
+            formControlName="city">
+              <mat-option *ngFor="let city of cities" [value]="city">
+                {{city}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('city').invalid && form.get('city').touched">City required</mat-error>
+      </div>
+    </div>
+
+      <div class="img-button col-md-4">        
+      </div>
+
+  <button [disabled]="form.invalid" [disabled]="" class="btn search-item-btn btn-dark btn-block">Search</button>
+
+
+  </form>
+</div>

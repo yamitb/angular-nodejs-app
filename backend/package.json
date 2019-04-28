@@ -1,0 +1,17 @@
+{
+  "name": "angularapp",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "bootstrap": "4.0.0-beta.2",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.4.0",
+    "multer": "^1.4.1",
+    "mysql": "^2.16.0",
+    "core-js": "^2.5.4",
+    "cors": "^2.8.5"
+  }
+}

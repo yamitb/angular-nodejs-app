@@ -1,0 +1,60 @@
+
+.card-login-style{
+  width: 100%;
+  padding: 8% 10%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  background: #e6f3ff;
+}
+
+.card-login-style button{
+  border-radius: 6px;
+  margin: auto;
+  width: 50%;
+  background-color: #7e889a;;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.card-login-style label{
+  color: #212529;
+    font-weight: 500;
+}
+
+
+
+.card-login-style button:disabled{
+  color: white;
+  font-weight: 400;
+  cursor: no-drop;
+  background-color: #b3b3b3;
+}
+
+
+@media (max-width: 768px){
+  .card-login-style input {
+    font-size: 10px;
+  }
+  .card-login-style label {
+    font-size: 12px;
+  }
+}
+
+
+@media (min-width: 992px){
+  .card-login-style {
+    /* height: 300px; */
+  }
+}
+
+/* .my-div-center{
+  border: 5px solid red;
+    width: 20%;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+}
+ */

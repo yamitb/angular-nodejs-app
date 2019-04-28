@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output } from '@angular/core';
+import {FormControl,Validators, FormGroup} from '@angular/forms';
+import {Observable, Subscription} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { ItemsService } from '../../services/items.service';
+import { Item } from '../../models/Item';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/User';
+import { SearchService } from '../../services/search.service';
+import { PageEvent } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -7,43 +16,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  recipe =  {
-    milk:1,
-    flour:40,
-    sugar:30
-  }
-  available = {
-    milk:5,
-    flour:120,
-    sugar:400,
-  }
+  items: Item[];
+  private authListenerSub: Subscription;
+  private ItemsListenerSub: Subscription;
+  userIsAuthanticated: boolean;
+  user:User;
+  totalItems = 0;
+  itemsPerPage = 1;
+  currentPage = 0;
+  pageSizeOptions = [1];
+  isLoading: boolean = false;
+  item:Item;
+  
+  constructor(   
+    private ItemsService: ItemsService,
+    private authService: AuthService,
+    private searchService: SearchService) { 
 
-
-  constructor() { 
-    var resultEnd = this.batches(this.recipe,this.available);
-    console.log("resultEnd " + resultEnd);
   }
 
   ngOnInit() {
+
+    this.searchService.getItemListener().subscribe(item =>{
+      this.item = item
+    });
+
+    
+    this.ItemsListenerSub = this.searchService.getItemsUpdatedListener()
+    .subscribe((itemsData: {items:Item[],itemsCount:number}) => {
+      this.isLoading = false;
+      this.items = itemsData.items;
+      this.totalItems = itemsData.itemsCount;
+
+      console.log("items from searchhhhhhhhhhhhhhh");
+      console.log(this.items);
+
+      // console.log("this.itemsPerPage " + this.itemsPerPage);
+      // console.log("this.currentPage " + this.currentPage);
+    });
+
+    this.authListenerSub = this.authService.getAuthStatusListener().subscribe( isAuthaticated => {
+      this.userIsAuthanticated = isAuthaticated;
+      this.user = this.authService.getUser();
+    });
+  }
+
+  onChangedPage(pageData: PageEvent){
+    this.isLoading = true;
+    this.currentPage = pageData.pageIndex;
+    this.itemsPerPage = pageData.pageSize;
+
+      console.log("thisssssssssssss item");
+      console.log(this.item);
+      this.searchService.searchItems(this.item,this.itemsPerPage,this.currentPage);
+    
+
   }
 
 
-  batches(recipe, available){
-      var maxResult = Number.MAX_VALUE;     
-      for(var key in recipe){
-        if(available[key]){
-          var result = Math.floor(available[key]/recipe[key]);
-          if(result === 0 ){
-             return 0;
-          }        
-          else if(result < maxResult ){
-            maxResult = result;
-          }
-        }else{
-          return 0;
-        }
-      }
-       return maxResult;
-  }
+
 
 }

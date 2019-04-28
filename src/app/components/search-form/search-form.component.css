@@ -1,0 +1,44 @@
+
+input[type="file"]{
+  visibility: hidden;
+}
+
+button:disabled{
+  opacity: 0.30;
+  cursor: not-allowed;
+}
+
+.error-message{
+  color:red;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+.search-form-card{
+  width: 80%;
+  margin: auto;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  background: #e6f3ff;
+}
+
+.search-item-title{
+  font-size: 20px;
+  color: black;
+}
+
+mat-form-field{
+  width: 80%;
+  height: 65px !important;
+}
+
+.search-item-btn{
+  width: 30%;
+  margin: auto;
+}
+
+@media (min-width: 769px){
+  .search-item-btn  {
+    width: 20%;   
+  }
+}
+

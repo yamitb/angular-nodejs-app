@@ -60,6 +60,24 @@ export class UsersService {
     return this.usersUpdated.asObservable();
   }
 
+  createUser(user: User){
+    // console.log("create user service");
+    // console.log(user);
+    this.http.post<{ message: string, userId: string }>('http://localhost:3000/user/signup',user).subscribe(responseData =>{
+      console.log("responseData.result " + responseData.message);
+      console.log("responseData.userId " + responseData.userId);
+    });
+
+  }
+  loginUser(user: User){
+     console.log("login user service");
+    // console.log(user);
+    this.http.post<{ message: string }>('http://localhost:3000/user/login',user).subscribe(responseData =>{
+      console.log(responseData);     
+    });
+
+  }
+
   addUser(user: User) {
     this.http.post<{ message: string, userId: string }>('http://localhost:3000/users', user).subscribe(responseData => {
       user.id = responseData.userId;

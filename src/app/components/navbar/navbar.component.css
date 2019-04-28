@@ -1,4 +1,39 @@
+.navbar-style{
+  background-color: #29303B;
+}
+.navbar li .nav-link, .navbar .navbar-brand{
+  color: #ffffff;
+  /* text-shadow: 1px 1px 0 blue; */
+}
+
+.navbar li .nav-link:hover{
+  color: #007791 !important;
+}
+
+.navbar-brand-style{
+  background-color: #EC5252;
+  border: 1px solid transparent;
+  padding: 3px 10px;
+  border-radius: 15px;
+}
+
+
+
 .routerLinkActiveStyle{
- color: red !important;
+ color: green !important;
  font-weight: bold;
+}
+
+.nav-button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+.nav-name{
+  color:  #007791 !important;
+  font-weight: bold;
 }

@@ -12,7 +12,7 @@ export class PostsComponent implements OnInit {
   currentPost: Post = {
     id: 0,
     title: '',
-    body: ''
+    body: '',
   }
 
   isEdit: boolean = false;
@@ -22,7 +22,6 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
      this.postsService.getPosts().subscribe( posts => {
-       //console.log(posts);
        this.posts = posts;
      })
   }
@@ -45,7 +44,7 @@ export class PostsComponent implements OnInit {
          this.currentPost = {
           id: 0,
           title: '',
-          body: ''
+          body: '',
         }
        }
      })

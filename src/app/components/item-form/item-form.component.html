@@ -1,0 +1,97 @@
+<div class="card card-body add-item-card">
+<h1 class="add-item-title">Add Item</h1>
+<hr>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <div class="row">
+      <div class="col-6 col-md-4">        
+          <mat-form-field>
+            <mat-select 
+            type="text"
+            placeholder="Type" 
+            formControlName="type"
+            >
+              <mat-option *ngFor="let type of types" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('type').invalid && form.get('type').touched">Type required</mat-error>
+          <!-- <div class="error-message" *ngIf="itemType.errors?.required == true && itemType.touched" >
+              Type required
+            </div> -->
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field>
+            <mat-select 
+            placeholder="Size" 
+            formControlName="size">
+              <mat-option *ngFor="let size of sizes" [value]="size">
+                {{size}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('size').invalid && form.get('size').touched">Size required</mat-error>
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field>
+            <mat-select 
+            placeholder="Color"  
+            formControlName="color">
+              <mat-option *ngFor="let color of colors" [value]="color">
+                {{color}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('color').invalid && form.get('color').touched">Color required</mat-error>
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field>
+            <mat-select 
+             placeholder="Gender" 
+             formControlName="gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender">
+                {{gender}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('gender').invalid && form.get('gender').touched">Gender required</mat-error>
+      </div>
+
+      <div class="col-6 col-md-4">
+          <mat-form-field>
+            <mat-select 
+            placeholder="City" 
+            formControlName="city">
+              <mat-option *ngFor="let city of cities" [value]="city">
+                {{city}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error class="error-message" *ngIf="form.get('city').invalid && form.get('city').touched">City required</mat-error>
+      </div>
+
+      <div class="img-button col-6 col-md-4">        
+          <button class="pick-image-button" mat-stroked-button type="button" (click)="filePicker.click()">Pick image</button>
+          <input type="file" #filePicker (change)="onImagePicked($event)">
+          <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+              <img [src]="imagePreview" [alt]="form.value.type">
+          </div>
+          <mat-error class="error-message" *ngIf="form.get('image').invalid && form.get('image').touched">Image file required</mat-error>
+      </div>
+
+
+  </div>
+<div class="row">
+    <button [disabled]="form.invalid" [hidden]="mode == 'edit'" [disabled]="" class="btn create-item-btn btn-dark btn-block">Add Item</button>
+  <button [disabled]="form.invalid" [hidden]="mode == 'create'" [disabled]="" class="btn edit-item-btn btn-block">Edit Item</button>
+</div>
+
+  </form>
+</div>
+
+
+
+

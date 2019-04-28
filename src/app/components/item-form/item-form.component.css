@@ -1,0 +1,87 @@
+.add-item-container{
+  /* background-image: url('../../../../img/my_closet.png');
+  width: 100%;
+  height: 300px;
+  background-size: cover; */
+}
+
+.add-item-card {
+  width: 80%;
+  margin: auto;
+  /* background-image: linear-gradient(to bottom right, #2b303a, #6dafba,#2d2e30); */
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  background: #e6f3ff;
+}
+
+
+
+.add-item-title{
+  font-size: 20px;
+  color: black;
+  
+}
+.add-item-field-title{
+  color: white;
+  font-size: 12px;
+}
+mat-form-field{
+  width: 80%;
+  height: 65px !important;
+}
+
+.pick-image-button{
+  height: 35px;
+  margin-top: 10px;
+  background-color: #a0d1f1;
+}
+
+.img-button{
+  margin-top: 0px;
+}
+
+input[type="file"]{
+  visibility: hidden;
+}
+
+button:disabled{
+  opacity: 0.60;
+  cursor: not-allowed;
+}
+
+.error-message{
+  color:red;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.image-preview{
+  height: 100px;
+  margin: 0px 0px 20px 0px;
+}
+.create-item-btn {
+  width: 30%;
+  margin: auto;
+}
+.edit-item-btn {
+  width: 30%;
+  background-color:#007791 !important;
+  margin: auto;
+}
+
+.image-preview img{
+  height: 100%;
+}
+
+@media (min-width: 769px){
+  .create-item-btn, .edit-item-btn  {
+    width: 20%;
+    
+  }
+}
+
+@media (max-width: 422px){
+  .pick-image-button {
+    width: 12px;
+    font-size: 9px;
+  }
+}
+

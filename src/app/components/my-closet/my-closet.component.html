@@ -1,32 +1,57 @@
-<div class="display-settings-container card card-body mb-3">
-  <h4>Display-Settings</h4>
-  <form>
-    <div class="form-group">
-      <label>Sensor</label>
-      <br>
-      <label class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="displaySettings.Sensor.OGEN" name="OGEN"> OGEN
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="displaySettings.Sensor.IKONOS" name="IKONOS"> IKONOS
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="displaySettings.Sensor.GEOEYE" name="GEOEYE"> GEOEYE
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="displaySettings.Sensor.OFEK" name="OFEK"> OFEK
-      </label>
+
+
+
+
+
+<app-item-form [itemsPerPageItemForm]="itemsPerPage" [currentPageItemForm]="currentPage" ></app-item-form>
+<br>
+<h1 class="my-closet-title">My Closet</h1>
+<hr>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div *ngIf="items && !isLoading">
+ <div class="card item-card-my-closet" *ngFor="let item of items">
+    <div class="card-body">
+      <div class="row">
+          <div class="col-4 col-md-6">
+              <p class="item-field-title"> {{ item.type }}</p>
+              <hr>
+              <p class="item-field">{{ item.size }}</p>
+              <p class="item-field">{{ item.color }}</p>
+              <p class="item-field">{{ item.gender }}</p>
+              <p class="item-field">{{ item.city }}</p>
+              <hr>
+              <button *ngIf="userIsAuthanticated &&  item.userId === user.id" (click)="removeItem(item.id)" class="btn-remove"><i class="fa fa-remove"></i></button>
+              <button *ngIf="userIsAuthanticated &&  item.userId === user.id"(click)="editItem(item)" class=" edit-item-button"><i class="fa fa-pencil"></i></button>  
+          </div>
+          <div class="item-image-container col-8 col-md-6">
+              <img [src]="item.imagePath" [alt]="item.type">
+            </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label>Background</label>
-      <select [(ngModel)]="displaySettings.Background" name="color" class="form-control">
-        <option *ngFor="let color of colors">
-          {{color}}
-        </option>
-      </select>
-    </div>
-    <button (click)=changeSettings() class="btn btn-block mb-3">Change settings</button>
-  </form>
+  </div>
 </div>
 
-<canvas [ngStyle]="currentStyle" class="container" id="myCanvas" width="1400" height="1000" #myCanvas></canvas>
+  <mat-paginator class="my-closet-paginator" *ngIf="items"
+  [length]="totalItems" 
+  [pageSize]="itemsPerPage" 
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)">
+  </mat-paginator>
+
+  <p class="info-text" *ngIf="!isLoading && !items">You don't have any items in your closet!</p>
+
+  <!-- <div col-md-6>
+      <p> <a routerLink="" >{{ item.type }} </a></p>
+      <p>{{ item.size }}</p>
+      <p>{{ item.color }}</p>
+      <p>{{ item.gender }}</p>
+      <p>{{ item.city }}</p>
+      <hr>
+      <button *ngIf="userIsAuthanticated &&  item.userId === user.id" (click)="removeItem(item.id)" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+<!-- 
+      <!-- <button (click)="editPost(book)" class="btn btn-light"><i class="fa fa-pencil"></i></button> -->  
+  <!-- </div>
+  <div item-image col-md-6>
+     <img [src]="item.imagePath" [alt]="item.type">
+  </div>  -->

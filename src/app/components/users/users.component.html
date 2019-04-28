@@ -136,6 +136,7 @@
               <i [ngClass]="user.hide ? 'fa fa-plus' : 'fa fa-minus'"></i>
             </button>
           </small>
+          <span *ngIf="userIsAuthenticated">
           <small>
               <i (click)="editUser(user)" *ngIf="!user.hide" class="ml-3 fa fa-pencil" >
               </i>
@@ -144,6 +145,7 @@
             <i (click)="removeUser(user.id)" *ngIf="!user.hide" class="ml-3 fa fa-remove" >
             </i>
       </small>
+          </span>
         </h3>
         <ul class="list-group" *ngIf="!user.hide">
           <li class="list-group-item">
